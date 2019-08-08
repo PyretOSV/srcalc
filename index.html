@@ -162,7 +162,11 @@
 			highestSR = newSR;
 			document.getElementById("statsHighest").innerHTML = highestSR;
 		}
-				
+		
+		if(gamesPlayed > 0){
+			document.getElementById("removeBtn").innerHTML = "";
+		}
+		
 		gamesPlayed++;
 		var d = new Date();
 		var t = d.getHours() + ":";
@@ -171,14 +175,14 @@
 		}
 		t += d.getMinutes();
 		
-		var createGame = "<div id='game"+gamesPlayed+"' class='"+ background +"'>"+ (newSR - currentSR) +" | "+ newSR +"<div class='rightSideOfGame'>"+ t +" <span id='removeBtn'><button onclick='removeGame("+gamesPlayed+")'>X</button></div></span></div>";
+		var createGame = "<div id='game"+gamesPlayed+"' class='"+ background +"'>"+ (newSR - currentSR) +" | "+ newSR +"<div class='rightSideOfGame'>"+ t +" <span id='removeBtn'><button onclick='removeGame("+gamesPlayed+")'>X</button></span></div></div>";
 		
 		document.getElementById("statsGames").innerHTML = gamesPlayed;
 		document.getElementById("statsRate").innerHTML = Math.round((wins/(wins+losses+ties)*100));
 		document.getElementById("statsRateNoTie").innerHTML = Math.round((wins/(wins+losses)*100));
 		document.getElementById("gameList").insertAdjacentHTML('afterbegin', createGame);
 		
-		if(gamesPlayed > 1){
+		if(gamesPlayed == 1){
 			document.getElementById("removeBtn").innerHTML = "";
 		}
 	}
