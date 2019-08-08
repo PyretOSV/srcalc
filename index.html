@@ -178,7 +178,7 @@
 		document.getElementById("statsRateNoTie").innerHTML = Math.round((wins/(wins+losses)*100));
 		document.getElementById("gameList").insertAdjacentHTML('afterbegin', createGame);
 		
-		if(gamesPlayed == 1){
+		if(gamesPlayed > 1){
 			document.getElementById("removeBtn").innerHTML = "";
 		}
 	}
