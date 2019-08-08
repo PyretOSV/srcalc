@@ -162,11 +162,7 @@
 			highestSR = newSR;
 			document.getElementById("statsHighest").innerHTML = highestSR;
 		}
-		
-		if(gamesPlayed > 0){
-			document.getElementById("removeBtn").innerHTML = "";
-		}
-		
+				
 		gamesPlayed++;
 		var d = new Date();
 		var t = d.getHours() + ":";
@@ -181,6 +177,10 @@
 		document.getElementById("statsRate").innerHTML = Math.round((wins/(wins+losses+ties)*100));
 		document.getElementById("statsRateNoTie").innerHTML = Math.round((wins/(wins+losses)*100));
 		document.getElementById("gameList").insertAdjacentHTML('afterbegin', createGame);
+		
+		if(gamesPlayed == 1){
+			document.getElementById("removeBtn").innerHTML = "";
+		}
 	}
 	
 	function updateSr(){
