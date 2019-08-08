@@ -1,0 +1,138 @@
+body {
+	font-family: Verdana,Geneva,sans-serif;
+	background-color: #2b2b2b;
+	color: #f9f9f9;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#sr{
+	display: table-cell;
+	float: left;
+	height: 120px;
+	width: 35vw;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 80px;
+}
+
+#icon{
+	position: relative;
+	float: left;
+	height: 92px;
+	width: 112px;
+	background-image: url("imgs/silver.png");
+}
+
+#currentSrSpan{
+	float: left;
+	position: relative;
+}
+
+#justSr{
+	position: relative;
+	float: left;
+	color: #b200ff;
+}
+
+#newGame{
+	display: table-cell;
+	position: relative;
+	margin: 20px;
+	margin-bottom: 50px;
+	float: left;
+	
+}
+
+#cont{
+	display: table-cell;
+	position: relative;
+	width: 35vw;
+	float: left;
+}
+
+#gameList{
+	display: table-cell;
+	position: relative;
+	width: 35vw;
+	float: left;
+	margin:	10px;
+}
+
+#stats{
+	display: table-cell;
+	position: relative;
+	width: 50vw;
+	float: left;
+	margin-left: 10px;
+}
+
+#todaysGames{
+	margin-left: 50px;
+	font-size: 15px;
+	float: left;
+	text-align: left;
+}
+
+.tie{
+	background-color: #6e6e6e;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.win{
+	background-color: #214d1c;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.loss{
+	background-color: #4d1c1c;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.rightSideOfGame{
+	float: right;
+	text-align: right;
+	font-size: 12px;
+	color: #a9a9a9;
+	line-height: 20px;
+}
+
+.statsBoxes{
+	margin: 10px;
+	float: left;
+	height: 200px;
+	width: 250px;
+	-webkit-box-shadow: 2px 5px 16px 0px black, 5px 5px 19px 5px rgba(35,35,35,0); 
+	box-shadow: 2px 5px 16px 0px black, 5px 5px 19px 5px rgba(35,35,35,0);
+	background: #CCCCCC;
+	color: #2b2b2b;
+}
+
+.statsTop{
+	height: 75%;
+	width: 100%;
+	font-size: 72px;
+	text-align: center;
+	line-height: 170px;
+}
+
+.statsBottom{
+	text-align: center;
+	font-size: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

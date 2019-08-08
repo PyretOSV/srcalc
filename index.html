@@ -1,0 +1,255 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<div id="cont">
+	<div id="sr">
+		<span id="icon">
+		</span>
+		<span id="currentSrSpan">
+		</span>
+		<span id="justSr">
+			SR
+		</span>
+	</div>
+	<div id="newGame">
+		<input id="newSrInput" type="text">
+		<button onclick="changeSR()">
+			Change SR
+		</button>
+	</div>
+	<div id="gameList">
+	</div>
+</div>
+<div id="stats">
+	<div class="statsBoxes">
+		<div id="statsWins" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Wins
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsLoss" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Losses
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsTies" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Ties
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsGames" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Games Played
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div class="statsTop">
+			<span id="statsRate">0</span>%
+		</div>
+		<div class="statsBottom">
+			Win Rate
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div class="statsTop">
+			<span id="statsRateNoTie">0</span>%
+		</div>
+		<div class="statsBottom">
+			Win Rate (No Ties)
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsPlusMinus" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Differential
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsHighest" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Highest SR
+		</div>
+	</div>
+	<div class="statsBoxes">
+		<div id="statsStart" class="statsTop">
+			0
+		</div>
+		<div class="statsBottom">
+			Start SR
+		</div>
+	</div>
+</div>
+
+<script>
+	var derankCount		 	= 0;
+	var skillGroups		 	= [0, 1500, 2000, 2500, 3000, 3500, 4000];
+	var activeSkillGroup 	= 0;
+	var firstSR				= 0;
+	var highestSR			= 0;
+	var currentSR 			= 0;
+	var newSR 				= 0;
+	var prevSR				= [];
+	var wins 				= 0;
+	var losses 				= 0;
+	var ties 				= 0;
+	var gamesPlayed			= 0;
+	
+	function changeSR(){
+		newSR = document.getElementById("newSrInput").value;
+		document.getElementById("newSrInput").value = "";
+
+		if(newSR > 0){
+			if(currentSR != 0){
+				prevSR.push(newSR);
+				addGame();
+			}
+			if(firstSR == 0){
+				highestSR = newSR;
+				firstSR = newSR;
+				lastSR = newSR;
+				
+				for(i=6; i>=0; i--){
+					if(skillGroups[i] <= newSR){
+						activeSkillGroup = i;
+						break;
+					}
+				}
+				
+				document.getElementById("statsHighest").innerHTML = highestSR;
+				document.getElementById("statsStart").innerHTML = firstSR;
+			}
+			
+			currentSR = newSR;
+			document.getElementById("statsPlusMinus").innerHTML = (currentSR-firstSR);
+			updateSr();
+		}
+	}
+	
+	function addGame(){
+		var background;
+		if(currentSR==newSR){
+			background = "tie";
+			ties++;
+			document.getElementById("statsTies").innerHTML = ties;
+		}
+		else if(currentSR < newSR){
+			background = "win";
+			wins++;
+			document.getElementById("statsWins").innerHTML = wins;
+		}
+		else{
+			background = "loss";
+			losses++;
+			document.getElementById("statsLoss").innerHTML = losses;
+		}
+		
+		if(highestSR < newSR){
+			highestSR = newSR;
+			document.getElementById("statsHighest").innerHTML = highestSR;
+		}
+		
+		if(gamesPlayed > 0){
+			document.getElementById("removeBtn").innerHTML = "";
+		}
+		
+		gamesPlayed++;
+		var d = new Date();
+		var t = d.getHours() + ":";
+		if(d.getMinutes() < 10){
+			t += "0";
+		}
+		t += d.getMinutes();
+		
+		var createGame = "<div id='game"+gamesPlayed+"' class='"+ background +"'>"+ (newSR - currentSR) +" | "+ newSR +"<div class='rightSideOfGame'>"+ t +" <span id='removeBtn'><button onclick='removeGame("+gamesPlayed+")'>X</button></div></span></div>";
+		
+		document.getElementById("statsGames").innerHTML = gamesPlayed;
+		document.getElementById("statsRate").innerHTML = Math.round((wins/(wins+losses+ties)*100));
+		document.getElementById("statsRateNoTie").innerHTML = Math.round((wins/(wins+losses)*100));
+		document.getElementById("gameList").insertAdjacentHTML('afterbegin', createGame);
+	}
+	
+	function updateSr(){
+		document.getElementById("currentSrSpan").innerHTML = currentSR;
+		if(activeSkillGroup <= 6 && currentSR >= skillGroups[activeSkillGroup+1]){
+			activeSkillGroup++;
+		}
+		if(activeSkillGroup == 0){
+			document.getElementById("icon").style.backgroundImage= "url(imgs/bronze.png)";
+		}
+		else if(activeSkillGroup == 1){
+			haveWeDeranked("silver");
+		}
+		else if(activeSkillGroup == 2){
+			haveWeDeranked("gold");
+		}
+		else if(activeSkillGroup == 3){
+			haveWeDeranked("platinum");
+		}
+		else if(activeSkillGroup == 4){
+			haveWeDeranked("diamond");
+		}
+		else if(activeSkillGroup == 5){
+			haveWeDeranked("master");
+		}
+		else if(activeSkillGroup == 6){
+			haveWeDeranked("grandmaster");
+		}
+	}
+	
+	function haveWeDeranked(rank){
+		if(currentSR < skillGroups[activeSkillGroup] && derankCount < 5){
+			derankCount++;
+		}
+		else if(derankCount >= 5){
+			derankCount = 0;
+			activeSkillGroup--;
+			updateSr();
+		}
+		document.getElementById("icon").style.backgroundImage= "url(imgs/"+ rank +".png)";
+	}
+	
+	function removeGame(which){
+		if(prevSR[gamesPlayed-1] == prevSR[gamesPlayed-2]){
+			ties--;
+			document.getElementById("statsTies").innerHTML = ties;
+		}
+		else if((prevSR[gamesPlayed-1] - prevSR[gamesPlayed-2]) > 0){
+			wins--;
+			document.getElementById("statsWins").innerHTML = wins;
+		}
+		else{
+			losses--;
+			document.getElementById("statsLoss").innerHTML = losses;
+		}
+		
+		var element = document.getElementById("game"+gamesPlayed);
+		element.parentNode.removeChild(element);
+		
+		currentSR = prevSR[gamesPlayed-2];
+		gamesPlayed--;
+		prevSR.pop();
+		
+		document.getElementById("statsGames").innerHTML = gamesPlayed;
+		document.getElementById("statsPlusMinus").innerHTML = (currentSR-firstSR);
+		document.getElementById("currentSrSpan").innerHTML = currentSR;
+		document.getElementById("statsRate").innerHTML = Math.round((wins/(wins+losses+ties)*100));
+		document.getElementById("statsRateNoTie").innerHTML = Math.round((wins/(wins+losses)*100));
+	}
+	
+	updateSr();
+</script>
