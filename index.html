@@ -17,82 +17,82 @@
 			Change SR
 		</button>
 	</div>
-	<div id="gameList">
+	<div id="stats">
+		<div class="statsBoxes">
+			<div id="statsWins" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Wins
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsLoss" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Losses
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsTies" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Ties
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsGames" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Games Played
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div class="statsTop">
+				<span id="statsRate">0</span>%
+			</div>
+			<div class="statsBottom">
+				Win Rate
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div class="statsTop">
+				<span id="statsRateNoTie">0</span>%
+			</div>
+			<div class="statsBottomSmaller">
+				Win Rate (No Ties)
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsPlusMinus" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Differential
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsHighest" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Highest SR
+			</div>
+		</div>
+		<div class="statsBoxes">
+			<div id="statsStart" class="statsTop">
+				0
+			</div>
+			<div class="statsBottom">
+				Start SR
+			</div>
+		</div>
 	</div>
 </div>
-<div id="stats">
-	<div class="statsBoxes">
-		<div id="statsWins" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Wins
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsLoss" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Losses
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsTies" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Ties
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsGames" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Games Played
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div class="statsTop">
-			<span id="statsRate">0</span>%
-		</div>
-		<div class="statsBottom">
-			Win Rate
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div class="statsTop">
-			<span id="statsRateNoTie">0</span>%
-		</div>
-		<div class="statsBottomSmaller">
-			Win Rate (No Ties)
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsPlusMinus" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Differential
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsHighest" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Highest SR
-		</div>
-	</div>
-	<div class="statsBoxes">
-		<div id="statsStart" class="statsTop">
-			0
-		</div>
-		<div class="statsBottom">
-			Start SR
-		</div>
-	</div>
+<div id="gameList">
 </div>
 
 <script>
@@ -112,8 +112,8 @@
 	function changeSR(){
 		newSR = document.getElementById("newSrInput").value;
 		document.getElementById("newSrInput").value = "";
-
-		if(newSR > 0){
+		
+		if(newSR > 0 && newSR < 5000){
 			if(currentSR != 0){
 				prevSR.push(newSR);
 				addGame();

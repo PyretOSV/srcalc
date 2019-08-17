@@ -11,7 +11,7 @@ body {
 	display: table-cell;
 	float: left;
 	height: 120px;
-	width: 35vw;
+	width: 30vw;
 	text-align: center;
 	vertical-align: middle;
 	font-size: 80px;
@@ -42,7 +42,6 @@ body {
 	margin: 20px;
 	margin-bottom: 50px;
 	float: left;
-	
 }
 
 #cont{
@@ -55,9 +54,11 @@ body {
 #gameList{
 	display: table-cell;
 	position: relative;
-	width: 35vw;
+	width: 25vw;
 	float: left;
 	margin:	10px;
+	margin-top: 0px;
+	margin-left: -5vw;
 }
 
 #stats{
@@ -89,7 +90,7 @@ body {
 
 .loss{
 	background-color: #4d1c1c;
-	padding: 10px;
+	padding: 8px;
 	margin-bottom: 5px;
 }
 
